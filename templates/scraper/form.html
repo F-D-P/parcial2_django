@@ -2,19 +2,30 @@
 {% block title %}Scraper{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h2>Scraping Educativo</h2>
-    <form method="post">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="url" class="form-label">URL a analizar</label>
-            <input type="text" name="url" class="form-control" placeholder="https://ejemplo.com" required>
-        </div>
-        <div class="mb-3">
-            <label for="keyword" class="form-label">Palabra clave (opcional)</label>
-            <input type="text" name="keyword" class="form-control" placeholder="ejemplo: educación">
-        </div>
-        <button type="submit" class="btn btn-primary">Scrapear</button>
-    </form>
+<div class="container mt-4">
+  <h2>Scraping Educativo</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="url" class="form-label">URL a analizar</label>
+      <input type="text" name="url" class="form-control" placeholder="https://ejemplo.com" required>
+    </div>
+    <div class="mb-3">
+      <label for="keyword" class="form-label">Palabra clave (opcional)</label>
+      <input type="text" name="keyword" class="form-control" placeholder="ejemplo: educación">
+    </div>
+    <button type="submit" class="btn btn-primary">Scrapear</button>
+  </form>
+
+  {% if resultados %}
+  <h3 class="mt-4">Resultados</h3>
+  <table class="table table-bordered">
+    <tbody>
+      {% for r in resultados %}
+      <tr><td>{{ r }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
 </div>
 {% endblock %}

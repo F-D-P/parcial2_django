@@ -1,21 +1,11 @@
 {% extends 'base.html' %}
-{% block title %}Informe{% endblock %}
+{% block title %}Informe enviado{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-    <h2>Informe generado y enviado</h2>
-    <p>{{ mensaje }}</p>
-
-    <div class="card mt-3">
-        <div class="card-body">
-            <h5 class="card-title">Alumno: {{ alumno.nombre }} {{ alumno.apellido }}</h5>
-            <p class="card-text"><strong>Curso:</strong> {{ alumno.curso }}</p>
-            <p class="card-text"><strong>Usuario dueño:</strong> {{ alumno.usuario.username }}</p>
-        </div>
+    <div class="alert alert-success">
+        El informe del alumno fue enviado correctamente por correo.
     </div>
-
-    <div class="mt-3">
-        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Volver al Dashboard</a>
-    </div>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary">Volver al Dashboard</a>
 </div>
 {% endblock %}

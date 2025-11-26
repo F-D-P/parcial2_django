@@ -1,40 +1,38 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout, authenticate
 from django.core.mail import send_mail
-from django.conf import settings
 from .forms import RegistroForm
 
-def home(request):
-    return render(request, 'home.html')
-
-def registro_view(request):
-    if request.method == 'POST':
+def registro(request):
+    if request.method == "POST":
         form = RegistroForm(request.POST)
         if form.is_valid():
             user = form.save()
-            # Enviar correo de bienvenida
             send_mail(
-                'Bienvenido a la plataforma',
-                f'Hola {user.username}, gracias por registrarte.',
-                settings.DEFAULT_FROM_EMAIL,   # 👈 usa DEFAULT_FROM_EMAIL
+                "Bienvenido",
+                "Gracias por registrarte.",
+                "tuemail@gmail.com",
                 [user.email],
                 fail_silently=False,
             )
-            return redirect('login')
+            login(request, user)
+            return redirect("dashboard")
     else:
         form = RegistroForm()
-    return render(request, 'cuentas/registro.html', {'form': form})
+    return render(request, "cuentas/registro.html", {"form": form})
 
 def login_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
+    if request.method == "POST":
+        user = authenticate(
+            request,
+            username=request.POST["username"],
+            password=request.POST["password"]
+        )
+        if user:
             login(request, user)
-            return redirect('dashboard')
-    return render(request, 'cuentas/login.html')
+            return redirect("dashboard")
+    return render(request, "cuentas/login.html")
 
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    return redirect("login")

@@ -4,17 +4,16 @@
 {% block content %}
 <div class="container mt-4">
     <h2>Detalle del Alumno</h2>
-    <div class="card">
+    <div class="card shadow-sm">
         <div class="card-body">
-            <h5 class="card-title">{{ alumno.nombre }} {{ alumno.apellido }}</h5>
-            <p class="card-text"><strong>Curso:</strong> {{ alumno.curso }}</p>
-            <p class="card-text"><strong>Usuario dueño:</strong> {{ alumno.usuario.username }}</p>
+            <h5 class="card-title">{{ alumno.nombre }}</h5>
+            <p class="card-text"><strong>Carrera:</strong> {{ alumno.carrera }}</p>
+            <p class="card-text"><strong>Promedio:</strong> {{ alumno.promedio }}</p>
         </div>
     </div>
 
     <div class="mt-3">
-        <a href="{% url 'alumno_update' alumno.id %}" class="btn btn-warning">Editar</a>
-        <a href="{% url 'alumno_delete' alumno.id %}" class="btn btn-danger">Eliminar</a>
+        <a href="{% url 'enviar_pdf' alumno.id %}" class="btn btn-success">Enviar PDF</a>
         <a href="{% url 'dashboard' %}" class="btn btn-secondary">Volver al Dashboard</a>
     </div>
 </div>
