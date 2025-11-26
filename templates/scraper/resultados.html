@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Resultados Scraper{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Resultados del scraping</h2>
+    <p><strong>URL:</strong> {{ url }}</p>
+
+    {% if titulos %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Título</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in titulos %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ t }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <form method="post" action="{% url 'scraper_enviar' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success mt-3">Enviar por correo</button>
+        </form>
+    {% else %}
+        <p>No se encontraron resultados.</p>
+    {% endif %}
+
+    {% if mensaje %}
+        <div class="alert alert-info mt-3">{{ mensaje }}</div>
+    {% endif %}
+</div>
+{% endblock %}
