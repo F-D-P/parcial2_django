@@ -1,16 +1,36 @@
 {% extends 'base.html' %}
-{% block title %}Formulario Alumno{% endblock %}
+{% block title %}Nuevo Alumno{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-    <h2>{% if form.instance.pk %}Editar Alumno{% else %}Nuevo Alumno{% endif %}</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">
-            {% if form.instance.pk %}Guardar cambios{% else %}Crear Alumno{% endif %}
-        </button>
-        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancelar</a>
-    </form>
+  <h2 class="mb-3">Registrar Alumno</h2>
+  <form method="post" class="card p-4 shadow-sm">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        {{ form.nombre.label_tag }} {{ form.nombre }}
+      </div>
+      <div class="col-md-6 mb-3">
+        {{ form.apellido.label_tag }} {{ form.apellido }}
+      </div>
+      <div class="col-md-6 mb-3">
+        {{ form.dni.label_tag }} {{ form.dni }}
+      </div>
+      <div class="col-md-6 mb-3">
+        {{ form.email.label_tag }} {{ form.email }}
+      </div>
+      <div class="col-md-6 mb-3">
+        {{ form.fecha_nacimiento.label_tag }} {{ form.fecha_nacimiento }}
+      </div>
+      <div class="col-md-6 mb-3">
+        {{ form.carrera.label_tag }} {{ form.carrera }}
+      </div>
+      <div class="col-md-6 mb-3">
+        {{ form.promedio.label_tag }} {{ form.promedio }}
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </form>
 </div>
 {% endblock %}
