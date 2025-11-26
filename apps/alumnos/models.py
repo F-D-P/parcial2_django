@@ -5,7 +5,6 @@ from django.db import models
 class Alumno(models.Model):
     nombre = models.CharField(max_length=100, default="Nombre")
     apellido = models.CharField(max_length=100, default="Apellido")
-    dni = models.CharField(max_length=20, null=True, blank=True)
     email = models.EmailField(unique=True, default="sinemail@example.com")
     fecha_nacimiento = models.DateField(null=True, blank=True)
     carrera = models.CharField(
