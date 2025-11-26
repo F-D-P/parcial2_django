@@ -16,7 +16,7 @@ def registro_view(request):
             send_mail(
                 'Bienvenido a la plataforma',
                 f'Hola {user.username}, gracias por registrarte.',
-                settings.EMAIL_HOST_USER,
+                settings.DEFAULT_FROM_EMAIL,   # 👈 usa DEFAULT_FROM_EMAIL
                 [user.email],
                 fail_silently=False,
             )
